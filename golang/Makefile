@@ -8,7 +8,7 @@ up:
 .PHONY: up
 
 down:
-	docker compose -f docker-compose.yaml stop -t 1
+	docker compose -f docker-compose.yaml stop -t 5
 	docker compose -f docker-compose.yaml down
 .PHONY: down
 
@@ -21,7 +21,7 @@ test:
 	rm ./output/* -f
 	COMPOSE_HTTP_TIMEOUT=300 docker compose -f docker-compose.yaml up --build --remove-orphans --detach
 	go run ./verify_output.go; EXIT_CODE=$$?; \
-	docker compose -f docker-compose.yaml stop -t 1; \
+	docker compose -f docker-compose.yaml stop -t 5; \
 	docker compose -f docker-compose.yaml down; \
 	exit $$EXIT_CODE
 .PHONY: test
